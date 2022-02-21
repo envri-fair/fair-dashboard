@@ -42,6 +42,19 @@ h2 {
   color: #924040;
 } 
 
+thead {
+  background-color: #050047;
+}
+
+thead tr th {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+td {
+  font-size: 1rem;
+}
+
 td.red {
   background-color: #ff0000;
 }
