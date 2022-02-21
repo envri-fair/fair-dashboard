@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/fair-dashboard/static/css/main.0e3d198d.css",
-    "main.js": "/fair-dashboard/static/js/main.9b07f13b.js",
+    "main.css": "/fair-dashboard/static/css/main.58ac83fb.css",
+    "main.js": "/fair-dashboard/static/js/main.0950572e.js",
     "static/js/787.519b23a2.chunk.js": "/fair-dashboard/static/js/787.519b23a2.chunk.js",
     "index.html": "/fair-dashboard/index.html",
-    "main.0e3d198d.css.map": "/fair-dashboard/static/css/main.0e3d198d.css.map",
-    "main.9b07f13b.js.map": "/fair-dashboard/static/js/main.9b07f13b.js.map",
+    "main.58ac83fb.css.map": "/fair-dashboard/static/css/main.58ac83fb.css.map",
+    "main.0950572e.js.map": "/fair-dashboard/static/js/main.0950572e.js.map",
     "787.519b23a2.chunk.js.map": "/fair-dashboard/static/js/787.519b23a2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0e3d198d.css",
-    "static/js/main.9b07f13b.js"
+    "static/css/main.58ac83fb.css",
+    "static/js/main.0950572e.js"
   ]
 }
