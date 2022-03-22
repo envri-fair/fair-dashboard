@@ -2,6 +2,10 @@ body {
   background-color: #e9e9e9;
 }
 
+div.principle {
+  margin-bottom: 80px;
+}
+
 .content {
   margin: auto;
   width: 75%;
@@ -22,6 +26,10 @@ body {
   justify-content: start;
   font-size: calc(10px + 2vmin);
   color: #383838;
+}
+
+.menu {
+  margin-bottom: 30px;
 }
 
 a {
@@ -53,17 +61,5 @@ thead tr th {
 
 td {
   font-size: 1rem;
-}
-
-td.red {
-  background-color: #ff0000;
-}
-
-td.green {
-  background-color: #09ff00;
-}
-
-td.yellow {
-  background-color: #ffe600;
 }
 

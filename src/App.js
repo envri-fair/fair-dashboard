@@ -5,15 +5,13 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'reactstrap';
 
 function PrincipleTitle(props) {
-  return (<h2><a href={props.uri}>{props.label}</a>: {props.definition}</h2>);
+  return (<h2><a id={props.label} href={props.uri}>{props.label}</a>: {props.definition}</h2>);
 }
 
 function PrincipleDemonstrators(props) {
   if (data['Demonstrators'][props.principle] == undefined)
     return (null);
-  
-  console.log(props.principle)
-
+    
   return (<div>
     { 
       data['Demonstrators'][props.principle].map(demonstrator => 
@@ -28,33 +26,31 @@ function PrincipleTableHeader() {
 }
 
 function PrincipleTableRow(props) {
+  const year1 = data[props.principle][props.infrastructure]['2019']
+  const year2 = data[props.principle][props.infrastructure]['2020']
+  const year3 = data[props.principle][props.infrastructure]['2021']
+
+  var year1_factor = null, year2_factor = null, year3_factor = null
+
+  if (year1 != undefined && year1[1] > 0) year1_factor = (year1[0] / year1[1]).toFixed(1)
+  if (year2 != undefined && year2[1] > 0) year2_factor = (year2[0] / year2[1]).toFixed(1)
+  if (year3 != undefined && year3[1] > 0) year3_factor = (year3[0] / year3[1]).toFixed(1)
+
   return (<tr><td>{props.infrastructure}</td>
-    <td className= 
-    {
-      props.year1 === -1 ? "red"
-      : props.year1 === 0 ? "yellow"
-      : props.year1 === 1 ? "green"
-      : "&nbsp;" 
-    }></td>
-    <td className=
-    {
-      props.year2 === -1 ? "red"
-      : props.year2 === 0 ? "yellow"
-      : props.year2 === 1 ? "green"
-      : "&nbsp;" 
-    }></td>
-    <td className=
-    {
-      props.year3 === -1 ? "red"
-      : props.year3 === 0 ? "yellow"
-      : props.year3 === 1 ? "green"
-      : "&nbsp;" 
-    }></td></tr>); 
+    { year1_factor === null ? <td>&nbsp;</td> : <td style={{ backgroundColor: getColor(year1_factor) }} title={[year1[0],year1[1]].join("/")}></td> }
+    { year2_factor === null ? <td>&nbsp;</td> : <td style={{ backgroundColor: getColor(year2_factor) }} title={[year2[0],year2[1]].join("/")}></td> }
+    { year3_factor === null ? <td>&nbsp;</td> : <td style={{ backgroundColor: getColor(year3_factor) }} title={[year3[0],year3[1]].join("/")}></td> }
+    </tr>);
+}
+
+function getColor(value){
+  var hue=((value)*120).toString(10);
+  return ["hsl(",hue,",100%,50%)"].join("");
 }
 
 function Principle(props) {
   return (
-    <div>
+    <div className="principle">
       <PrincipleTitle uri={data.Principles[props.principle].uri} 
                       label={data.Principles[props.principle].label} 
                       definition={data.Principles[props.principle].definition} />
@@ -64,12 +60,7 @@ function Principle(props) {
       <tbody>
         { 
           Object.keys(data[props.principle]).map((infrastructure, i) => ( 
-            <PrincipleTableRow key={i}
-              infrastructure={infrastructure} 
-              year1={data[props.principle][infrastructure]['2019']} 
-              year2={data[props.principle][infrastructure]['2020']}
-              year3={data[props.principle][infrastructure]['2021']}
-              />
+            <PrincipleTableRow key={i} principle={props.principle} infrastructure={infrastructure} />
           ) )
         }
       </tbody>
@@ -83,6 +74,14 @@ function App() {
     <div className="content">
       <div className="header">
         <h1>FAIR Dashboard</h1>
+      </div>
+      <div className="menu">
+        <h2>Principles</h2>
+        {
+          Object.keys(data.Principles).map((principle, i) => ( 
+            <><a href={['#',principle].join('')}><Button outline color="secondary" className="my-4" style={{width: "75px"}}>{principle}</Button></a>{' '}</> 
+          ))
+        }  
       </div>
       <div className="main">
         {

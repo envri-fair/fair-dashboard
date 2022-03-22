@@ -121,16 +121,14 @@ for binding in d1['results']['bindings']:
         c_data = d2[p][c]
 
     if y not in c_data:
+        y_data = [0, 1]
         if r == 'https://w3id.org/fair/fip/terms/declares-current-use-of':
-            y_data = 1
-        elif r == 'https://w3id.org/fair/fip/terms/declares-planned-use-of':
-            y_data = -1
+            y_data[0] = 1
     else:
         y_data = c_data[y]
-        if y_data == -1 and r == 'https://w3id.org/fair/fip/terms/declares-current-use-of':
-            y_data = 0
-        elif y_data == 1 and r == 'https://w3id.org/fair/fip/terms/declares-planned-use-of':
-            y_data = 0
+        y_data[1] += 1
+        if r == 'https://w3id.org/fair/fip/terms/declares-current-use-of':
+            y_data[0] += 1
 
     c_data[y] = y_data
 
@@ -139,15 +137,11 @@ for community in d2['Communities']:
         d2['R1.3'][community] = {} 
     for year in d2['Years']:
         if year not in d2['R1.3'][community]:
-            d2['R1.3'][community][year] = None
+            d2['R1.3'][community][year] = [0, 0]
         for principle in d2['Principles'].keys():
             if community in d2[principle] and year in d2[principle][community]:
-                if d2['R1.3'][community][year] == None:
-                    d2['R1.3'][community][year] = d2[principle][community][year]
-                elif d2['R1.3'][community][year] == -1 and d2[principle][community][year] != -1:
-                    d2['R1.3'][community][year] = 0
-                elif d2['R1.3'][community][year] == 1 and d2[principle][community][year] != 1:
-                    d2['R1.3'][community][year] = 0
+                d2['R1.3'][community][year][0] += d2[principle][community][year][0]
+                d2['R1.3'][community][year][1] += d2[principle][community][year][1]
 
 with open('d2.json', 'w') as f:
   json.dump(d2, f, indent = 2)
