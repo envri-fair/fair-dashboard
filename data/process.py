@@ -139,6 +139,8 @@ for community in d2['Communities']:
         if year not in d2['R1.3'][community]:
             d2['R1.3'][community][year] = [0, 0]
         for principle in d2['Principles'].keys():
+            if principle == 'R1.3':
+                continue
             if community in d2[principle] and year in d2[principle][community]:
                 d2['R1.3'][community][year][0] += d2[principle][community][year][0]
                 d2['R1.3'][community][year][1] += d2[principle][community][year][1]
